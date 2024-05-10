@@ -16,10 +16,6 @@ The homepage design was based on a design in Figma provided by the community. Yo
 
 [SplideJS](https://splidejs.com/)
 
-### Creating a new custom Split JS theme
-
-I modified the CSS code base of the Splide JS themes to create a new one with some modifications for this project.
-
 [TailwindCSS](https://tailwindcss.com/)
 
 ## 🧞 Commands
