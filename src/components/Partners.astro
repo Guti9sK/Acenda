@@ -1,0 +1,121 @@
+<section class="w-full h-[276px] bg-[#fffafa]">
+  <div class="py-16 flex flex-col gap-y-[72px] w-full">
+    <h2 class="font-bold text-[40px] text-center">OUR PARTNERS</h2>
+
+    <div class="slider">
+      <div class="logos">
+        <div class="flex items-center gap-x-5">
+          <img src="./src/assets/group.png" alt="" />
+          <span class="text-2xl text-[#404040]">Cozybnb</span>
+        </div>
+        <div class="flex items-center gap-x-5">
+          <img src="./src/assets/group-1.png" alt="" />
+          <span class="text-2xl text-[#404040]">Serendipity</span>
+        </div>
+        <div class="flex items-center gap-x-5">
+          <img src="./src/assets/group-2.png" alt="" />
+          <span class="text-2xl text-[#404040]">Hideaway</span>
+        </div>
+        <div class="flex items-center gap-x-5">
+          <img src="./src/assets/group-3.png" alt="" />
+          <span class="text-2xl text-[#404040]">Earthly</span>
+        </div>
+        <div class="flex items-center gap-x-5">
+          <img src="./src/assets/group-4.png" alt="" />
+          <span class="text-2xl text-[#404040]">The Nook</span>
+        </div>
+        <div class="flex items-center gap-x-5">
+          <img src="./src/assets/group-5.png" alt="" />
+          <span class="text-2xl text-[#404040]">Homely</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .slider {
+    width: 100%;
+  }
+  .logos {
+    padding-block: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 88px;
+  }
+  .slider[data-animated="true"] {
+    overflow: hidden;
+    -webkit-mask: linear-gradient(
+      90deg,
+      transparent,
+      white 20%,
+      white 80%,
+      transparent
+    );
+    mask: linear-gradient(
+      90deg,
+      transparent,
+      white 20%,
+      white 80%,
+      transparent
+    );
+  }
+  .slider[data-animated="true"] .logos {
+    width: max-content;
+    flex-wrap: nowrap;
+    animation: scroll var(--_animation-duration, 40s)
+      var(--_animation-direction, forwards) linear infinite;
+  }
+  .slider[data-direction="right"] {
+    --_animation-direction: reverse;
+  }
+
+  .slider[data-direction="left"] {
+    --_animation-direction: forwards;
+  }
+
+  .slider[data-speed="fast"] {
+    --_animation-duration: 20s;
+  }
+
+  .slider[data-speed="slow"] {
+    --_animation-duration: 60s;
+  }
+  .slider[data-animated="true"] .logos:hover {
+    animation-play-state: paused;
+  }
+  @keyframes scroll {
+    to {
+      transform: translate(calc(-50% - 48px));
+    }
+  }
+</style>
+
+<script>
+  const scrollers = document.querySelectorAll(".slider");
+
+  // If a user hasn't opted in for recuded motion, then we add the animation
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    addAnimation();
+  }
+
+  function addAnimation() {
+    scrollers.forEach((scroller) => {
+      // add data-animated="true" to every `.scroller` on the page
+      scroller.setAttribute("data-animated", "true");
+
+      // Make an array from the elements within `.scroller-inner`
+      const scrollerInner = scroller.querySelector(".logos");
+      const scrollerContent = Array.from(scrollerInner.children);
+
+      // For each item in the array, clone it
+      // add aria-hidden to it
+      // add it into the `.scroller-inner`
+      scrollerContent.forEach((item) => {
+        const duplicatedItem = item.cloneNode(true) as Element;
+        duplicatedItem.setAttribute("aria-hidden", "true");
+        scrollerInner.appendChild(duplicatedItem);
+      });
+    });
+  }
+</script>
